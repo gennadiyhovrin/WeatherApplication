@@ -4,6 +4,8 @@ export default class Model{
 constructor(view){
     this.view = view;
 }
+
+// get geolocation
 getGeolocation(){
     
     fetch('http://ip-api.com/json')
@@ -16,6 +18,8 @@ getGeolocation(){
       this.getWeatherOurCity(data.city);
     });
 }
+
+// get weather for weatherplagin
 getWeatherOurCity(cityData){
     let apiKey = '54903414985ba1ac754f4d87d51323f3';
     

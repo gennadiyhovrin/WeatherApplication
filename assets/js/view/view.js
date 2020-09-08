@@ -45,6 +45,7 @@ export default class View {
        Dew point: 8°C
        Visibility: 10.0km`;
 
+       //render weather plagin
         let weatherCard = document.createElement('div');
         weatherCard.insertAdjacentHTML('afterbegin', `
         <div class="media">
