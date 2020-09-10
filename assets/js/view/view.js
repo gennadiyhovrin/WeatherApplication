@@ -32,27 +32,21 @@ export default class View {
         this.appDiv.append(this.mainContainer);
     }
     //render card
-    cardRender() {
-        const clearSky = 'https://openweathermap.org/img/wn/01d@2x.png';
-        const rain = 'https://openweathermap.org/img/wn/10d@2x.png';
-        const overcastClouds = 'https://openweathermap.org/img/wn/04d@2x.png';
-        const scatteredClouds = 'https://openweathermap.org/img/wn/03d@2x.png';
-        let weatherImg = rain;
-        let city = 'Dnipro';
-        let weather = `Feels like 30°C. Clear sky. Gentle Breeze 5.0m/s E
-       1013hPa Humidity: 20%
-       UV: 6
-       Dew point: 8°C
-       Visibility: 10.0km`;
+    cardRender(weather) {
+        console.log(weather);
+        
+       
 
        //render weather
         let weatherCard = document.createElement('div');
         weatherCard.insertAdjacentHTML('afterbegin', `
         <div class="media">
-        <img src="${weatherImg}" class="mr-3" alt="${city}">
+        <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" class="mr-3" alt="...">
         <div class="media-body">
-          <h5 class="mt-0">${city}</h5>
-          ${weather}
+          <h5 class="mt-0">${weather.name} ${weather.main.temp.toFixed(0)} °C</h5>
+          
+          Feels like ${weather.main.feels_like.toFixed(0)}°C
+          ${weather.weather[0].description.toUpperCase()}
           <button type="button" class="cng btn btn-outline-primary btn-sm ml-1">
           <span aria-hidden="true">&Xi;</span>
           </button>
@@ -67,23 +61,8 @@ export default class View {
         this.cardRow.append(weatherCard);
     }
 
-    // getWeatherImg(img){
-    //     const clearSky = 'https://openweathermap.org/img/wn/01d@2x.png';
-    //     const rain = 'https://openweathermap.org/img/wn/10d@2x.png';
-    //     const overcastClouds = 'https://openweathermap.org/img/wn/04d@2x.png';
-    //     const scatteredClouds = 'https://openweathermap.org/img/wn/03d@2x.png';
+    
 
-        
-    //     let image;
-    //     if( img == 'Clear'){
-    //     image = clearSky;
-        
-    //     }
-
-    //     this.showWeatherOurCity(image);
-        
-
-    // }
 //weather plagin
     showWeatherOurCity(weather) {
         

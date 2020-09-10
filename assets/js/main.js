@@ -9,8 +9,8 @@ let controller = new Controller(view,model);
 model.getGeolocation();
 
 view.appRender();
-view.cardRender();
-view.cardRender();
-view.cardRender();
+
 controller.addHandle();
+
+
 
