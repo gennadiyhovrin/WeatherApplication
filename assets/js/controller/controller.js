@@ -1,9 +1,19 @@
 "use strict";
 export default class Controller{
-    constructor(name){
-        this.name = name;
+    constructor(view,model){
+        this.view = view;
+        this.model = model;
+        this.getWeather = this.getWeather.bind(this);
     }
-    hello(){
-        console.log('hello controller');
+
+getWeather(){
+let city = this.view.mainInput.value;
+this.view.mainInput.value ="";
+this.model.getWeather(city);
+
+}
+
+    addHandle(){
+        this.view.mainButton.addEventListener("click",this.getWeather);
     }
     }
