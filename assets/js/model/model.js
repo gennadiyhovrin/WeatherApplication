@@ -94,30 +94,32 @@ export default class Model {
     this.weather.delete(city);
     localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
     this.renderWeatherCard();
+    this.view.renderAlert("Сity removed");
   }
 //edit city
   editCity(city) {
     this.weather.delete(city);
     localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
     this.view.mainInput.value = city;
+    
   }
 //clear city list
   clearCity() {
     this.weather.clear();
     localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
     this.renderWeatherCard();
-    console.log("clear city");
+    this.view.renderAlert("City list cleared");
+    
   }
  // init weather card at render ui
   initWeather(){
     let db = JSON.parse(localStorage.getItem("weather"));
     db.forEach((value) => {
     this.getWeather(value);
-    console.log(value);
+    
     });
     
-    console.log(db);
-    console.log(this.weather);  
+     
     
     
   }
