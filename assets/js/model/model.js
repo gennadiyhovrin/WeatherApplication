@@ -18,11 +18,11 @@ export default class Model {
       })
       .catch((err) => console.log("Request Failed", err));
   }
-startWidget(){
-  this.getRate();
-  this.getGeolocation();
-  
-}
+  startWidget() {
+    
+    this.getRate();
+    this.getGeolocation();
+  }
 
   // get weather for weather plagin
   getWeatherOurCity(cityData) {
@@ -34,16 +34,14 @@ startWidget(){
       })
       .then((data) => {
         this.view.showWeatherOurCity(data);
+        
       })
       .catch((err) => console.log("Request Failed", err));
-      
   }
 
   //get USD Rate
-  getRate(){
-    fetch(
-      `https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`
-    )
+  getRate() {
+    fetch(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
       .then((response) => {
         return response.json();
       })
@@ -52,7 +50,6 @@ startWidget(){
       })
       .catch((err) => console.log("Request Failed", err));
   }
-  
 
   // find weather
   getWeather(city) {
@@ -79,7 +76,7 @@ startWidget(){
       });
     });
   }
-
+ // render weather card
   renderWeatherCard() {
     this.view.cardRender(this.weather);
   }
@@ -87,22 +84,41 @@ startWidget(){
   //save city in DB
   setWeather(city, data) {
     this.weather.set(city, data);
+    localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
+    
+  
   }
-
-  delCity(city){
-    console.log(city);
-  this.weather.delete(city);
-  this.renderWeatherCard();
-  }
-
-  editCity(city){
-  this.weather.delete(city);
-  this.view.mainInput.value = city;
-  }
-
-  clearCity(){
-    this.weather.clear();
+  // delete city
+  delCity(city) {
+    
+    this.weather.delete(city);
+    localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
     this.renderWeatherCard();
-    console.log('clear city');
+  }
+//edit city
+  editCity(city) {
+    this.weather.delete(city);
+    localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
+    this.view.mainInput.value = city;
+  }
+//clear city list
+  clearCity() {
+    this.weather.clear();
+    localStorage.setItem("weather", JSON.stringify([...this.weather.keys()]));
+    this.renderWeatherCard();
+    console.log("clear city");
+  }
+ // init weather card at render ui
+  initWeather(){
+    let db = JSON.parse(localStorage.getItem("weather"));
+    db.forEach((value) => {
+    this.getWeather(value);
+    console.log(value);
+    });
+    
+    console.log(db);
+    console.log(this.weather);  
+    
+    
   }
 }
